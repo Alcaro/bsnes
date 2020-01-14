@@ -14,6 +14,8 @@ MAKEFLAGS := Rr
 ifeq ($(platform),)
   ifeq ($(OS),Windows_NT)
     platform := windows
+    delete  = $(info Deleting $1 ...) @del /q $(subst /,\,$1)
+    rdelete = $(info Deleting $1 ...) @del /s /q $(subst /,\,$1) && if exist $(subst /,\,$1) (rmdir /s /q $(subst /,\,$1))
   endif
 endif
 
@@ -34,15 +36,12 @@ ifeq ($(platform),)
   else
     $(error unknown platform, please specify manually.)
   endif
+endif
 
-  # common commands
-  ifeq ($(uname),)
-    delete  = $(info Deleting $1 ...) @del /q $(subst /,\,$1)
-    rdelete = $(info Deleting $1 ...) @del /s /q $(subst /,\,$1) && if exist $(subst /,\,$1) (rmdir /s /q $(subst /,\,$1))
-  else
-    delete  = $(info Deleting $1 ...) @rm -f $1
-    rdelete = $(info Deleting $1 ...) @rm -rf $1
-  endif
+# common commands
+ifndef delete
+  delete  = $(info Deleting $1 ...) @rm -f $1
+  rdelete = $(info Deleting $1 ...) @rm -rf $1
 endif
 
 compiler.c      = $(compiler) -x c -std=c11
