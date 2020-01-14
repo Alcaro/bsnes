@@ -37,7 +37,7 @@ ifeq ($(platform),)
 endif
 
 # common commands
-ifneq ($(shell cd),)
+ifeq ($(shell echo ^^),^)
   delete  = $(info Deleting $1 ...) @del /q $(subst /,\,$1)
   rdelete = $(info Deleting $1 ...) @del /s /q $(subst /,\,$1) && if exist $(subst /,\,$1) (rmdir /s /q $(subst /,\,$1))
 else
