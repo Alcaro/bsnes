@@ -7,7 +7,7 @@ namespace Math {
   static const long double Pi = 3.14159265358979323846;
 }
 
-#if defined(PLATFORM_WINDOWS)
+#if defined(API_WINDOWS)
   #include <nall/windows/guard.hpp>
   #include <initguid.h>
   #include <cguid.h>
@@ -44,7 +44,7 @@ namespace Math {
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#if !defined(PLATFORM_WINDOWS)
+#if defined(API_POSIX)
   #include <dlfcn.h>
   #include <unistd.h>
   #include <pwd.h>

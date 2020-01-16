@@ -1,11 +1,12 @@
 #pragma once
 
+#ifndef API_UNKNOWN
 #include <nall/file.hpp>
 #include <nall/stdint.hpp>
 
 #include <stdio.h>
 #include <stdlib.h>
-#if defined(PLATFORM_WINDOWS)
+#if defined(API_WINDOWS)
   #include <nall/windows/utf8.hpp>
 #else
   #include <fcntl.h>
@@ -223,3 +224,4 @@ public:
 };
 
 }
+#endif
